@@ -1,0 +1,48 @@
+name: Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manuscript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-pictures
+      - name: Compile manuscript
+        working-directory: manuscript
+        run: latexmk -pdf -interaction=nonstopmode -halt-on-error knot_fewnomials.tex
+
+  arithmetic-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Compile audit script
+        run: python -m py_compile scripts/repro/fewnomial_bound_audit.py
+      - name: Run finite audit
+        run: >-
+          python scripts/repro/fewnomial_bound_audit.py
+          --check-doubly-alternating 50 100 500 2000 10000
+
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: formal
+          build: true
+          use-mathlib-cache: true

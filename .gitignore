@@ -1,0 +1,25 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+
+# Lean and documentation build directories
+formal/.lake
+docs/_build/
+
+# LaTeX intermediate files. The final manuscript PDF is intentionally tracked.
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
