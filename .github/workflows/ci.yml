@@ -46,3 +46,5 @@ jobs:
           lake-package-directory: formal
           build: true
           use-mathlib-cache: true
+      - name: Audit project source and compiled declaration axioms
+        run: python3 formal/scripts/check_certificate.py

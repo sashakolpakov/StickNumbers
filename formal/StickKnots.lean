@@ -2,8 +2,10 @@ import StickKnots.AsymptoticCertificate
 import StickKnots.CertificationLogic
 import StickKnots.Counting
 import StickKnots.DoublyAlternating
+import StickKnots.FewnomialBound
 import StickKnots.Geometry
 import StickKnots.LowerCertification
+import StickKnots.ManuscriptArithmetic
 import StickKnots.PolygonalCore
 import StickKnots.StickUpperCertificate
 
@@ -32,3 +34,6 @@ soundness. -/
 #print axioms StickKnots.certifiedKnotCount_log_isTheta
 #print axioms StickKnots.eventually_coefficient_lower_bound_fixedWord
 #print axioms StickKnots.eventually_optimized_deficit_lower_bound
+#print axioms StickKnots.eventually_coefficient_upper_bound
+#print axioms StickKnots.provedOptimizedDeficitArithmetic
+#print axioms StickKnots.eventually_optimized_deficit_lower_bound_proved

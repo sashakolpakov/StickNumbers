@@ -18,11 +18,8 @@ chambers,” “numbers of braids,” or “numbers of knots.”
 Build and audit the complete target with:
 
 ```sh
-/Users/sasha/.elan/bin/lake update
-/Users/sasha/.elan/bin/lake exe cache get
-/Users/sasha/.elan/bin/lake build StickKnots
-rg -n '(^|[[:space:]])(sorry|admit)([[:space:]]|$)|^[[:space:]]*axiom[[:space:]]|native_decide' \
-  --glob '*.lean' .
+lake exe cache get
+make verify
 ```
 
 `StickKnots.lean` imports every module and runs `#print axioms` on the main
@@ -145,9 +142,15 @@ no free numerical variable standing for the number of knots.
 
   This is the certified one-sided meaning of the manuscript's
   `N^((2/3+o(1))N)` lower bound.
-- The more precise varying-word display with the explicit
-  `-(2/3)N log log N + O(N)` deficit is kept separate.  Its exact finite
-  transfer and Stirling envelope are checked; the final elementary evaluation
-  of that explicit floor/log expression is exposed as
-  `OptimizedDeficitArithmetic`; Lean composes it with the typed lower transfer.
-  This optional input is not used for either principal asymptotic theorem.
+- `ManuscriptArithmetic.lean` proves the varying-word display with the explicit
+  `-(2/3)N log log N + O(N)` deficit. It constructs
+  `provedOptimizedDeficitArithmetic` and composes it with the typed lower
+  transfer; no further arithmetic input is needed.
+- The same module extracts the upper coefficient: for every `c > 3`,
+  eventually `log |K_N| ≤ c N log N`.
+
+See [MANUSCRIPT_MAP.md](MANUSCRIPT_MAP.md) for the full declaration map,
+including the manuscript arguments outside the formal target. Older
+optimized-equivalence wrappers in `AsymptoticCertificate.lean` are alternate
+conditional helpers; the publication conclusions use the proved fixed-word
+and deficit theorems described above.

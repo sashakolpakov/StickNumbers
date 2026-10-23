@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Development summary: stick-knot counting},
+ pdfauthor={},pdfsubject={Retrospective account based on project records}}
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\setlength{\emergencystretch}{2em}
+\title{Development summary: stick-knot counting}
+\author{}
+\date{23 October 2026}
+\begin{document}
+\maketitle
+\noindent\textbf{Manuscript authors: Alexander Kolpakov and Igor Rivin.}
+This retrospective account summarizes released mathematical sources and the
+corpus-preparation audit. It is not a transcript or a reconstruction of model
+turns. No original conversation export was available in the source tree.
+
+\section*{Problem and result}
+The mathematical problem is to count ordinary knot types that can be built
+with at most $N$ straight sticks. For their set $\mathcal K_N$, the manuscript
+proves
+\[
+ N^{(2/3+o(1))N}\le |\mathcal K_N|\le N^{3N+o(N)}.
+\]
+Thus $\log |\mathcal K_N|=\Theta(N\log N)$. This is a sharp logarithmic
+growth order, not an asymptotic equivalent or a determined leading constant.
+
+\section*{Mathematical route}
+\begin{enumerate}
+\item Represent an $N$-vertex polygon by $3N$ real coordinates. A
+  nonincident-edge intersection forces a cubic determinant to vanish;
+  quartic squared cross products exclude collapsed or overlapping adjacent
+  edges. There are only quadratically many walls.
+\item Delete all these walls, including benign degeneracies. Every
+  bounded-stick knot has a representative in the resulting open locus by
+  subdivision and generic perturbation. Knot type is constant along paths,
+  so a surjection from components bounds the knot population.
+\item Apply the refined sign-condition component estimate with its partial
+  binomial sum retained. Dividing by the dimension factorial changes the
+  relevant base from quadratic to linear in $N$, giving the upper exponent 3.
+\item Construct doubly down--up permutations on $4k$ letters from four
+  independent permutations on $k$ letters. The family has at least $(k!)^4$
+  elements and logarithmic deficit only $O(k)$ relative to $(4k)!$.
+\item Equal starting and finishing sets make arbitrary words in these
+  simple braids distinct normal forms. Pigeonhole by endpoint permutation
+  and append one common inverse-endpoint factor. The pure braids remain
+  distinct and use at most one additional simple factor.
+\item Transfer through the Malyutin--Stupakov injection and Huh--Oh
+  arc-to-stick inequality, losing at most a factor two on forgetting
+  orientation. Fixed word lengths give every coefficient below $2/3$;
+  word length $\lfloor\log N\rfloor$ yields the more precise lower deficit
+  $-(2/3)N\log\log N-O(N)$.
+\end{enumerate}
+
+\section*{Priority and audit decisions}
+To the authors' knowledge, the manuscript gives the first explicit
+determination of the logarithmic growth order in the stick budget. Older
+arc-index results supply the lower-bound inputs. The 2025 strong-geometry
+reconstruction theorem is related work that could, in principle, supply
+another counting route after additional deductions. The present proof uses
+direct component counting independently of that reconstruction theorem.
+The novelty audit retains a separate retrospective comparison, clearly
+identified as a deduction made in this project.
+
+The corpus audit checked the external statements used at the main interfaces
+and the manuscript's internal counting and budget calculations. It made the
+eventual positivity of the fixed-word strand count explicit. It also supplied
+a concrete circle-and-return-rail routing model to justify the uniform stick
+cost in the auxiliary addressed-link construction.
+
+\section*{Formal verification}
+The standalone Lean project uses actual polygon coordinates, multivariate
+wall polynomials, paths and component quotients, permutation words, endpoint
+fibers and a bounded-stick subtype of a supplied knot interface. It checks
+their internal finite and asymptotic deductions. The corpus preparation adds
+a proof of the previously separate optimized floor/log arithmetic and an
+eventual upper coefficient theorem for every coefficient above 3.
+
+Generic support, ambient-isotopy invariance, Barone--Basu, the structural
+Garside facts, the pure-braid-to-knot injection, the arc-to-stick inequality
+and orientation reversal remain explicit external theorem inputs. The
+classical ambient-isotopy quotient and the auxiliary link construction are
+not formalized. A successful axiom audit verifies these conditional proofs;
+it does not prove their theorem parameters.
+
+\section*{Source coverage}
+Sources are the manuscript, novelty audit, formal-verification documentation,
+the starting publication history and the new mathematical audit. They support
+this mathematical account, not an authenticated chronological conversation.
+The source acknowledgments report GPT-5.6-sol assistance; the underlying
+model run, original prompt and compute expenditure are not authenticated here.
+Public authorship is retained. Private conversation records, credentials,
+account/session fields and local machine paths are not included.
+\end{document}

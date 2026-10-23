@@ -6,8 +6,16 @@ __pycache__/
 # Lean and documentation build directories
 formal/.lake
 docs/_build/
+corpus/_build/
 
-# LaTeX intermediate files. The final manuscript PDF is intentionally tracked.
+# Lean compiler outputs, including files produced outside Lake's cache.
+*.olean
+*.olean.*
+*.ilean
+*.ir
+*.trace
+
+# LaTeX intermediate files. Release PDFs are intentionally tracked.
 *.aux
 *.bbl
 *.bcf
@@ -23,4 +31,6 @@ docs/_build/
 *.run.xml
 *.snm
 *.synctex.gz
+*.synctex
+*.xdv
 *.toc

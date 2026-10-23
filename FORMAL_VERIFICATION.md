@@ -24,6 +24,8 @@ natural-number variables.
 | End-to-end finite bounds | Injection of the lower family into the bounded-stick subtype of the supplied knot-type interface; finiteness of that subtype derived from the upper certificate, not assumed on the lower side |
 | Headline asymptotics | `log |K_N| = Θ(N log N)`, proved with `q=2`, `k=floor(N/132)` and internal floor/Stirling/asymptotic estimates |
 | Refined lower exponent | For every real `c < 2/3`, Lean chooses a sufficiently large fixed `q` and proves eventually `c N log N ≤ log |K_N|`; this certifies the one-sided meaning of `N^((2/3+o(1))N)` |
+| Refined upper exponent | For every real `c > 3`, Lean proves eventually `log |K_N| ≤ c N log N` from the finite upper bound |
+| Optimized lower deficit | Lean proves the internal floor/log estimate giving `log |K_N| ≥ (2/3)N log N - (2/3)N log log N - O(N)` |
 
 The exact optimized finite choice
 
@@ -33,11 +35,11 @@ k_N = floor((2N+15)/(12(q_N+9)))
 ```
 
 is also implemented, including its stick budget and factorial-free Stirling
-envelope. The optional sharper
-`-(2/3)N log log N + O(N)` evaluation is represented by the typed
-`OptimizedDeficitArithmetic` interface; Lean verifies its composition with the
-actual lower certificate. Neither the headline order nor the `2/3` lower
-exponent depends on that interface.
+envelope. `ManuscriptArithmetic.lean` now proves the sharper
+`-(2/3)N log log N + O(N)` evaluation, constructs
+`provedOptimizedDeficitArithmetic`, and composes it with the actual lower
+certificate. No extra arithmetic hypothesis is required. The pointwise
+calculation uses a deliberately loose linear-error constant of 100.
 
 ## External theorem boundary
 
@@ -67,10 +69,7 @@ construction in the manuscript is outside the current formal target.
 ```sh
 cd formal
 lake exe cache get
-lake build StickKnots
-
-rg -n '(^|[[:space:]])(sorry|admit)([[:space:]]|$)|^[[:space:]]*axiom[[:space:]]|native_decide' \
-  --glob '*.lean' .
+make verify
 ```
 
 The source scan is empty. The root module imports the complete publication
@@ -80,4 +79,5 @@ dependencies are only the standard Lean/mathlib foundations `propext`,
 parameters, so this audit verifies the conditional deductions rather than
 pretending to prove those inputs.
 
-For the declaration-level inventory, see [`formal/README.md`](formal/README.md).
+For the declaration-level inventory, see
+[`formal/MANUSCRIPT_MAP.md`](formal/MANUSCRIPT_MAP.md).

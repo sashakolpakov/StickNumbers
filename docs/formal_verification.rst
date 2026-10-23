@@ -23,12 +23,16 @@ fibers, and prime-satellite target. It proves:
   :math:`((k!)^4)^q\leq 2(4k)!\,|\mathcal K_{s_{k,q}}|`;
 * :math:`\log|\mathcal K_N|=\Theta(N\log N)`; and
 * for every :math:`c<2/3`, eventually
-  :math:`cN\log N\leq\log|\mathcal K_N|`.
+  :math:`cN\log N\leq\log|\mathcal K_N|`;
+* for every :math:`c>3`, eventually
+  :math:`\log|\mathcal K_N|\leq cN\log N`; and
+* the explicit lower deficit
+  :math:`(2/3)N\log N-(2/3)N\log\log N-O(N)`.
 
 The final item is proved with a sufficiently large fixed word length and does
 not assume the optimized floor/log asymptotics. The sharper displayed
-:math:`-(2/3)N\log\log N+O(N)` refinement has a separate typed arithmetic
-interface; Lean checks its composition with the finite lower certificate.
+refinement is proved in ``ManuscriptArithmetic.lean``, which discharges the
+floor/log arithmetic interface and composes it with the finite certificate.
 
 External boundary
 -----------------

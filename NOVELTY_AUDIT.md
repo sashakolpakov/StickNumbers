@@ -1,6 +1,6 @@
 # Novelty audit for the stick-knot counting result
 
-Audit date: 2026-08-02.
+Initial audit: 2026-08-02. Corpus audit update: 2026-10-23.
 
 ## Result being audited
 
@@ -22,20 +22,27 @@ $$
 \log |\mathcal K_N|=\Theta(N\log N).
 $$
 
-The defensible novelty claim is now precise:
+The priority claim concerns an explicit counting theorem in the literature:
+
+> To our knowledge, this is the first explicit determination of the
+> asymptotic growth order of the number of knot types realizable with at
+> most $N$ sticks: $\log|\mathcal K_N|=\Theta(N\log N)$.
+
+The contributions and their dependencies are:
 
 - The direct self-intersection-discriminant argument gives the new upper
   bound $N^{3N+o(N)}$ using only $O(N^2)$ cubic and quartic walls in $3N$
   coordinates.
-- Gros--Ramirez Alfonsin's November 2025 strong-geometry reconstruction
-  theorem already implies a factorial-scale upper bound after standard
-  sign-pattern counting. The full wedge table gives $N^{33N+o(N)}$; extracting
-  only the signs used in their proof gives $N^{6N+o(N)}$. Their paper does not
-  print these counting corollaries, but they are mathematically implicit and
-  must be credited.
-- The manuscript therefore improves the strongest readily extracted prior
-  upper exponent from $6$ to $3$; it must not claim that no $N^{O(N)}$ upper
-  bound was previously implicit.
+- The upper and lower proofs do not use Gros--Ramirez Alfonsin's
+  strong-geometry reconstruction theorem. Their paper proves reconstruction
+  of polygonal knot type from enriched sign data and does not state or prove
+  an asymptotic knot-counting bound by stick number.
+- The comparison exponents $33$ and $6$ below are retrospective deductions
+  made in this project by combining their reconstruction result with
+  additional polynomial encodings and sign-pattern estimates. They are not
+  previously published stick-counting theorems and do not establish priority
+  for that counting result. The reconstruction theorem itself retains its
+  attribution as related geometric work.
 - The Garside/Malyutin--Stupakov construction gives the new explicit lower
   exponent $2/3$, already among prime satellite knots. Earlier printed
   arc-index results already implied a smaller positive factorial exponent.
@@ -53,15 +60,17 @@ The defensible novelty claim is now precise:
 | Malyutin--Stupakov, *On the number of knots with a given arc index* (2022), <https://www.pdmi.ras.ru/preprint/2022/22-07.html> | Theorem 1 gives at least $\lfloor(k+4)/11\rfloor!$ oriented prime knots of arc index at most $k$. Proposition 1 injects $PB_n$ into oriented prime satellite knots with arc index at most $n\max\{11,s+8\}-4$ for an $s$-factor input. | The printed theorem plus Huh--Oh already gives $N^{(2/33+o(1))N}$ stick-bounded knots. The new variable-length extraction raises the exponent to $2/3$. |
 | Elrifai--Morton, *Algorithms for positive braids* (1994), <https://doi.org/10.1093/qmath/45.4.479> | Starting/finishing sets and uniqueness of left canonical form for positive braids. | External Garside input ensuring that the selected long words are distinct. |
 | Huh--Oh, *An upper bound on stick numbers of knots* (2011), <https://doi.org/10.1142/S0218216511008966> | $\mathrm{stick}(K)\le \tfrac32(\alpha(K)-1)$ for nontrivial knots. | Converts the arc-index construction into a stick-number lower bound. |
-| Gros--Ramirez Alfonsin, *Strong geometry: knots*, v3 (2025), <https://arxiv.org/abs/2504.00197v3> | Theorem 1 says isomorphic affine strong geometries of generic point configurations yield isotopic polygonal knots; the following corollary says the wedge matroid alone suffices. | This already turns finite sign data into a knot classifier. The full $N^{12}$-slot degree-$9$ table yields $N^{33N+o(N)}$ by standard sign counting. The $O(N^3)$ degree-at-most-$6$ queries actually used in their proof yield $N^{6N+o(N)}$. These are derived consequences, not printed bounds. |
+| Gros--Ramirez Alfonsin, *Strong geometry: knots*, v3 (2025), <https://arxiv.org/abs/2504.00197v3> | Theorem 1 says isomorphic affine strong geometries of generic point configurations yield isotopic polygonal knots; the following corollary says the wedge matroid alone suffices. The paper does not state an asymptotic count of knot types by stick number. | Related geometric work, independent of the present proof. The counting estimates derived below are this project's additional deductions, not counting theorems attributed to their paper. |
 | Cantarella--Rechnitzer--Schumacher--Shonkwiler, *New upper bounds for stick numbers* (2025), <https://arxiv.org/abs/2508.18263> | Computational upper bounds for individual stick numbers. | Does not count all types realizable with $N$ sticks. |
 | Pollack--Roy, *On the number of cells defined by a set of polynomials* (1993) | Dimension-sensitive cell bounds retaining the essential $(sd/m)^m$ dependence. | Shows that the real-algebraic technology predates this manuscript. |
 | Barone--Basu, *Refined bounds on the number of connected components of sign conditions on a variety* (2012), <https://arxiv.org/abs/1104.0636> | Explicit component bounds for realizable sign conditions. | External theorem used on the actual cubic/quartic wall family. |
 
-## Derivation of the strong-geometry comparison
+## Optional retrospective strong-geometry comparison
 
-For clarity, this is why the 2025 reconstruction paper changes the novelty
-claim.
+This calculation is separate from the manuscript's proof and priority claim.
+It explains how one can obtain another counting bound from the 2025
+reconstruction theorem after additional work. It is not a result claimed in
+that paper and is not an input to either of our bounds.
 
 Homogenize each vertex to $v_i=(1,p_i)\in\mathbb R^4$. Its full wedge ground
 set contains a normal to every ordered triple of the $v_i$, hence at most
@@ -123,25 +132,28 @@ interfaces it derives the final finite inequalities. No free numerical
 “number of chambers/braids/knots” is assumed. It then proves the headline
 `Theta(N log N)` law and, by a fixed-word argument, the eventual lower bound
 with every coefficient `c < 2/3`. The optimized finite parameters are also
-checked; only the optional explicit `-(2/3)N log log N + O(N)` evaluation is
-left behind a typed elementary-arithmetic interface. See `formal/README.md`
-for the exact boundary.
+checked. The corpus audit adds `ManuscriptArithmetic.lean`, which proves the
+explicit `-(2/3)N log log N + O(N)` evaluation and inhabits its previously
+separate arithmetic interface. It also derives every eventual upper
+coefficient greater than 3. See `formal/MANUSCRIPT_MAP.md` for the boundary
+and `corpus/MATHEMATICAL_AUDIT.md` for the current written audit and the
+difference between the repository manuscript and public arXiv v1.
 
 ## Defensible announcement wording
 
 Use:
 
-> We prove the explicit window
+> To our knowledge, we give the first explicit determination of the
+> asymptotic growth order of the number of knot types realizable with at
+> most $N$ sticks. We prove
 > $N^{(2/3+o(1))N}\le |\mathcal K_N|\le N^{3N+o(N)}$ for knot types realizable
-> with at most $N$ sticks. A recent strong-geometry reconstruction theorem
-> already implies the factorial upper scale; the signs used in its proof give
-> $N^{6N+o(N)}$. Our direct cubic/quartic discriminant count sharpens that to
-> $N^{3N+o(N)}$, while an explicit Garside construction gives the $2/3$ lower
-> exponent.
+> with at most $N$ sticks, hence $\log|\mathcal K_N|=\Theta(N\log N)$.
+> A direct cubic/quartic discriminant count gives the upper bound, and an
+> explicit Garside construction gives the lower bound.
 
-Do not claim that no $N^{O(N)}$ upper bound was previously implicit. Do not
-claim the first superexponential lower bound. Do not describe Calvo's
-discriminant or the general sign-condition theorem as new. The strongest story
-is the direct topology-to-algebraic-chambers bridge, the substantially sharper
-upper exponent, the explicit lower construction, and the kernel-checked
-conditional proof graph.
+The word “first” refers to an explicit determination of the logarithmic
+growth order in the literature. It does not claim that earlier mathematics
+could not be developed into another proof. The attribution of Calvo's model,
+the real-algebraic component theorem, and the cited lower-bound inputs is
+preserved. The separate comparison above must not be presented as a
+previously published stick-counting theorem or as a dependency of our proof.

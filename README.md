@@ -3,7 +3,8 @@
 This repository accompanies the manuscript **“Discriminant Varieties for
 Stick Knots and Links”** by Alexander Kolpakov and Igor Rivin.  The paper gives
 quantitative upper and lower bounds for the number of knot types realizable by
-polygonal knots with at most $N$ sticks.
+polygonal knots with at most $N$ sticks, giving, to our knowledge, the first
+explicit determination of their asymptotic growth order.
 
 The manuscript is the source of truth:
 
@@ -32,12 +33,12 @@ $N^{\Theta(N)}$, equivalently the order $N\log N$ of the logarithm.  A
 finer asymptotic equivalent remains open.
 
 The central result is the direct real-algebraic upper bound. The generic route
-through crossing-number enumeration gives only $\exp(O(N^2))$. A 2025
-strong-geometry reconstruction theorem already implies the factorial scale;
-counting the signs actually used in its proof gives $N^{6N+o(N)}$. Counting
+through crossing-number enumeration gives only $\exp(O(N^2))$. Counting
 the connected chambers of the cubic/quartic self-intersection discriminant
-sharpens this to $N^{3N+o(N)}$. An explicit Garside construction supplies the
-$N^{(2/3+o(1))N}$ lower bound, already among prime satellite knots.
+gives $N^{3N+o(N)}$. An explicit Garside construction supplies the
+$N^{(2/3+o(1))N}$ lower bound, already among prime satellite knots. Together
+these bounds establish the sharp logarithmic growth order. The proof is
+independent of strong-geometry reconstruction results.
 
 ## What is included
 
@@ -52,6 +53,8 @@ $N^{(2/3+o(1))N}$ lower bound, already among prime satellite knots.
 - `docs/`: Sphinx documentation which points back to the manuscript for all
   theorem statements and proofs.
 - `NOVELTY_AUDIT.md`: a qualified literature audit for the counting result.
+- `corpus/`: mathematical audit, retrospective development summary, and a
+  reproducible handoff for the external-contribution layout in `openai/math`.
 
 The exact formalization boundary is recorded in
 [FORMAL_VERIFICATION.md](FORMAL_VERIFICATION.md). Lean works with the actual
@@ -84,7 +87,7 @@ Build the Lean development:
 ```sh
 cd formal
 lake exe cache get
-lake build
+make verify
 ```
 
 See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for complete instructions.

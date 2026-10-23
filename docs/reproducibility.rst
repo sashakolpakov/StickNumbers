@@ -8,7 +8,7 @@ The three principal checks are:
 .. code-block:: console
 
    $ cd manuscript
-   $ latexmk -pdf -interaction=nonstopmode -halt-on-error knot_fewnomials.tex
+   $ latexmk -r .latexmkrc -pdf -interaction=nonstopmode -halt-on-error knot_fewnomials.tex
 
 .. code-block:: console
 
@@ -19,7 +19,7 @@ The three principal checks are:
 
    $ cd formal
    $ lake exe cache get
-   $ lake build StickKnots
+   $ make verify
 
 The Python audit uses only the standard library. The Lean and LaTeX dependency
 versions are controlled by the files in their respective project directories.

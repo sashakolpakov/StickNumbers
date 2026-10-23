@@ -12,12 +12,14 @@ The paper uses a standard LaTeX installation with `latexmk`, `amsmath`,
 
 ```sh
 cd manuscript
-latexmk -pdf -interaction=nonstopmode -halt-on-error knot_fewnomials.tex
+latexmk -r .latexmkrc -pdf -interaction=nonstopmode -halt-on-error knot_fewnomials.tex
 ```
 
 The build should resolve every citation and cross-reference without LaTeX or
 package warnings. The PDF is a versioned research artifact; auxiliary LaTeX
-files are ignored.
+files are ignored. The checked-in configuration fixes the build clock to
+23 October 2026 UTC; the TeX date is explicit. This gives repeatable PDF bytes
+with the same TeX installation, without asserting identity across TeX versions.
 
 ## Arithmetic audit
 
@@ -53,25 +55,25 @@ The pinned Lean 4/mathlib project is in `formal/`:
 ```sh
 cd formal
 lake exe cache get
-lake build StickKnots
+make verify
 ```
 
 The first command downloads mathlib's compiled cache when available; it is an
-optimization, not part of the proof. The second builds the complete project
-and the root axiom audit. To guard against unfinished declarations:
-
-```sh
-rg -n '(^|[[:space:]])(sorry|admit)([[:space:]]|$)|^[[:space:]]*axiom[[:space:]]|native_decide' \
-  --glob '*.lean' .
-```
-
-The expected search result is empty. Lean's `#print axioms` output may mention
+optimization, not part of the proof. The second builds the complete project,
+scans project sources excluding comments, and compiles every declaration in
+the root axiom audit. Lean's `#print axioms` output may mention
 the standard foundations used by mathlib—`propext`, `Classical.choice`, and
 `Quot.sound`—but no project-specific axiom. See
 [FORMAL_VERIFICATION.md](FORMAL_VERIFICATION.md) for the checked statements and
 the deliberate proof boundary.  A successful build verifies the core lemmas
 and conditional proof graph; it does not turn the external ambient-isotopy,
 Barone--Basu, Garside, or knot-theoretic inputs into Lean proofs.
+
+## Corpus handoff
+
+See [corpus/README.md](corpus/README.md). The preparation script creates a
+standalone manuscript/Lean/development-summary tree and verifies its file
+hashes and relative links. It does not modify another checkout or publish it.
 
 ## Sphinx documentation
 

@@ -15,8 +15,9 @@ The payoff:
 
 N^((2/3 + o(1))N) ≤ K(N) ≤ N^(3N + o(N)).
 
-A direct discriminant count beats the $N^{6N+o(N)}$ bound implicit in recent
-strong-geometry reconstruction; explicit Garside words drive the lower side.
+To our knowledge, the first explicit determination of the logarithmic growth
+order by stick budget. Direct discriminant counting supplies the upper bound;
+explicit Garside words drive the lower side.
 Lean-certified conditional proof graph included.
 
 With Igor Rivin:

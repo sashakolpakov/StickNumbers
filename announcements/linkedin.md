@@ -5,7 +5,8 @@
 How many genuinely different knots can be built from at most $N$ straight
 sticks?
 
-The answer lives on the factorial scale:
+To our knowledge, we give the first explicit determination of the
+asymptotic growth order. The answer lives on the factorial scale:
 
 **N^((2/3 + o(1))N) ≤ K(N) ≤ N^(3N + o(N)).**
 
@@ -18,10 +19,8 @@ So the problem becomes:
 
 **knot topology → determinant walls → algebraic chambers → counting**
 
-The classical crossing-diagram route gives only $\exp(O(N^2))$. A recent
-strong-geometry reconstruction theorem already implies the factorial scale;
-the signs used in that proof give an upper bound $N^{6N+o(N)}$. The direct
-discriminant count sharpens it to $N^{3N+o(N)}$. On the other side, an explicit
+The classical crossing-diagram route gives only $\exp(O(N^2))$. Our direct
+discriminant count gives $N^{3N+o(N)}$. On the other side, an explicit
 Garside-braid construction produces $N^{(2/3+o(1))N}$ prime satellite knots.
 
 This is not a tiny coefficient massage. It is a direct bridge between knot

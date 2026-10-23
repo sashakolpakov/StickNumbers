@@ -22,7 +22,9 @@ fixed word length `q=q(c)` and checks the complete finite-to-asymptotic
 argument.  The logarithmic choice `q_N=floor(log N)` remains useful for the
 more precise displayed `-(2/3) N log log N + O(N)` deficit.  That optional
 refinement is isolated in `OptimizedDeficitArithmetic` and then composed with
-the typed knot-count transfer inside Lean.
+the typed knot-count transfer inside Lean. `ManuscriptArithmetic.lean`
+subsequently proves this arithmetic input and exports the refined conclusion
+with only the cited geometry, real-algebraic, braid and knot inputs.
 -/
 
 namespace StickKnots

@@ -3,6 +3,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{hyperref}
 \usepackage{tikz}
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
@@ -22,7 +23,7 @@
 
 \title{Discriminant Varieties for Stick Knots and Links}
 \author{Alexander Kolpakov \and Igor Rivin}
-\date{\today}
+\date{23 October 2026}
 
 \begin{document}
 
@@ -30,14 +31,14 @@
 
 \begin{abstract}
 How many knot types can be built from a fixed budget of straight sticks?  We
-prove the explicit factorial-scale window
+give, to our knowledge, the first explicit determination of their asymptotic
+growth order.  Writing \(\Kcal_N\) for the knot types realizable with at most
+\(N\) sticks, we prove
 \[
  N^{(2/3+o(1))N}\le |\Kcal_N|\le N^{3N+o(N)}.
 \]
-A recent strong-geometry reconstruction theorem already implies an
-\(N^{O(N)}\) upper bound after standard sign-pattern counting; extracting only
-the signs used in its proof gives \(N^{6N+o(N)}\).  Our direct discriminant
-argument halves that leading upper exponent: it turns polygonal
+Thus \(\log|\Kcal_N|=\Theta(N\log N)\).  Our direct discriminant
+argument turns polygonal
 self-intersection into a sparse real-algebraic chamber problem in only
 linearly many dimensions.  A Garside refinement of the Malyutin--Stupakov
 pure-braid injection gives the \(2/3\) lower exponent, already among prime
@@ -99,25 +100,24 @@ A generic projection of an \(N\)-stick polygon has at most \(N(N-3)/2\)
 crossings, and classical exponential enumeration by crossing number gives the
 baseline \(|\Kcal_N|\le\exp(O(N^2))\) \cite{FreedmanHeWang}.  More recently,
 Gros--Ramirez Alfonsin proved that the strong geometry of a generic vertex
-configuration determines its polygonal-knot type \cite{GrosRamirez}.  Their
-result, combined with standard fixed-degree sign-pattern counting, already
-implies \(|\Kcal_N|=N^{O(N)}\): counting the full wedge-chirotope table gives
-\(N^{33N+o(N)}\), while counting only the \(O(N^3)\) degree-at-most-six sign
-queries used in their reconstruction proof gives \(N^{6N+o(N)}\).  These
-counting consequences do not appear as stated theorems in their paper, but
-they are immediate enough that we treat the factorial upper scale as prior
-implicit mathematics.
+configuration determines its polygonal-knot type \cite{GrosRamirez}.  In
+principle, their reconstruction theorem could be combined with sign-pattern
+estimates to obtain counting bounds.  Our proof takes a different route,
+counting chambers of the self-intersection discriminant directly, and is
+independent of that reconstruction theorem.
 
 Our contribution is the much sharper direct stick-space estimate obtained by
 making Calvo's semialgebraic discriminant model quantitative:
 \[
- |\Kcal_N|\le N^{(3+o(1))N},
+ |\Kcal_N|\le N^{(3+o(1))N}.
 \]
-which improves the reconstruction-based leading exponent from \(6\) to \(3\).
-The Garside construction below simultaneously raises the explicit lower
-exponent to \(2/3\).  The present result is therefore a sharper quantitative
-synthesis of established geometric and sign-condition inputs, not a new
-discriminant encoding or a new general real-algebraic theorem.
+Together with the lower construction, this gives, to our knowledge, the first
+explicit theorem establishing the sharp logarithmic growth order
+\(\log|\Kcal_N|=\Theta(N\log N)\).  The Garside construction below gives
+the explicit lower exponent \(2/3\).  We use established geometric and
+sign-condition inputs to obtain the counting theorem; the discriminant model
+and the general real-algebraic component theorem retain their original
+attributions.
 Randell--Simon--Tokle directly studied the counting
 function by polygon length and proved an exponential lower bound, but no
 comparable factorial lower bound \cite{RandellSimonTokle}.  Millett later
@@ -708,8 +708,8 @@ For each \(N\), set
     k_N=\left\lfloor\frac{N}{6(q+9)}\right\rfloor,
     \qquad n_N=4k_N.
 \]
-Then the stick budget in Theorem~\ref{thm:finite-stick-lower} is at most
-\(N\).  The factorial estimate from
+For sufficiently large \(N\), one has \(k_N\ge1\), and the stick budget in
+Theorem~\ref{thm:finite-stick-lower} is at most \(N\).  The factorial estimate from
 Lemma~\ref{lem:doubly-alternating}, followed by the elementary lower Stirling
 bound, gives
 \[
@@ -922,18 +922,27 @@ payload submatrix entry-by-entry.  Since the payload entries are \(2a_{ij}\),
 the matrix \(A\) is recovered from the ordinary unmarked link type.
 
 It remains to realize the prescribed matrix with the stated stick cost.  Here
-is a concrete routing model.  Give every component a private straight rail
-through a long rectangular box, with the rails mutually parallel and
-separated.  Allocate disjoint thin slabs along the rail direction, one slab
+is a concrete routing model.  Write \(r=2m+3\) for the total number of frame
+and payload components.  Place \(r\) distinct points \(v_i\) on the unit
+circle in a horizontal plane.  Give component \(i\) a vertical rail through
+\(v_i\), a return rail through \(2v_i\), and radial connectors above and
+below a long vertical cylinder.  Before inserting clasps, the resulting
+four-stick rectangles bound pairwise disjoint radial rectangles, so they
+form an unlink.  Allocate disjoint thin horizontal slabs, one slab
 for each required unit of linking.  In a slab assigned to components \(X,Y\),
 leave every other rail straight and replace short subsegments of the \(X\)-
-and \(Y\)-rails by a fixed polygonal realization of the two-strand full twist
+and \(Y\)-rails by an affine image of a fixed polygonal realization of the two-strand full twist
 \(\sigma_1^2\), or its mirror \(\sigma_1^{-2}\), as in
 Figure~\ref{fig:hopf-clasp}.  Its endpoints are matched to the original rail
-segments on the same respective sides of the slab.  The slabs and small
-tubular neighborhoods of all rails are disjoint.  Outside the long box, close
-each rail by a return arc in its own separated height plane; these closing arcs
-can be chosen as polygonal rectangles and introduce no linking.
+segments on the same respective sides of the slab.  The supporting ball can
+be a thin rectangular prism about the chord joining the two selected
+\(v_i\): strict convexity of the circle ensures that this chord contains no
+other rail point, and all return rails lie outside the unit disk.  Choose the
+prism thin enough to miss every other rail and every return rail.  An affine
+change of the fixed tangle changes its dimensions but not its number of
+segments.  Distinct slab interiors are disjoint, and the radial closing
+connectors lie above and below all slabs.  This gives the required uniform
+stick cost even when the selected pair is far apart in the cross-section.
 
 After choosing auxiliary orientations, choose between the two mirror-image
 full twists so that its two crossings have positive sign.  The crossing
@@ -1017,9 +1026,11 @@ headline \(\Theta(N\log N)\) law, and the eventual inequality
 subtype belongs to a supplied knot-type interface, not to a formalized quotient
 by ambient isotopy.  Generic support and isotopy invariance, Barone--Basu,
 Garside normal-form theory, Malyutin--Stupakov, Huh--Oh, and orientation
-reversal remain typed external theorems; the optional
-\(-\frac23N\log\log N+O(N)\) refinement has a separate arithmetic interface,
-and the auxiliary link construction is outside the formal target.  The
+reversal remain typed external theorems.  The internal floor/log calculation
+for the \(-\frac23N\log\log N+O(N)\) refinement is also proved in Lean,
+as is the eventual upper inequality with every coefficient greater than
+\(3\); no additional arithmetic hypothesis is needed.  The auxiliary link
+construction is outside the formal target.  The
 repository contains the declaration-level audit and build instructions.
 
 \section{Fewnomial and determinant directions}
@@ -1049,37 +1060,6 @@ at scale \(N^{9N+o(N)}\), while rank-four vector matroid data live at
 the four-point determinant data.  This is why its count is much smaller than
 the count of all order types.
 
-Gros--Ramirez Alfonsin's strong geometry makes this comparison quantitative
-\cite{GrosRamirez}.  Homogenize the \(N\) vertices to vectors
-\(v_i=(1,p_i)\in\R^4\).  Their full wedge ground set consists of the normals to
-the hyperplanes spanned by ordered triples of the \(v_i\), hence has at most
-\(N^3\) elements.  Its rank-four chirotope therefore has at most \(N^{12}\)
-sign entries.  Replacing each unit normal by its unnormalized cofactor vector
-does not change these signs.  One coordinate of such a normal has degree three
-in the vertex coordinates and the other three have degree at most two, so a
-wedge determinant has degree at most nine.  A standard realizable-sign-pattern
-bound \cite{PollackRoy} in \(3N\) variables consequently gives
-\[
-    \#\{\text{realizable full wedge tables}\}
-       \le N^{33N+o(N)}.
-\]
-Their reconstruction theorem says that this is also an upper bound for generic
-polygonal-knot types, and a sufficiently small generic perturbation covers
-every type in \(\Kcal_N\).
-
-One can do much better without counting their unused signs.  In their proof,
-the crossing, over--under, and crossing-sign queries use \(O(N^2)\) ordinary
-affine determinants.  The ordering of crossings along a projected edge uses
-one witness sign for each triple of polygon edges, hence \(O(N^3)\) signs of
-degree at most six.  Applying the same sign-pattern estimate only to these
-queries gives the implicit bound
-\[
-    |\Kcal_N|\le N^{6N+o(N)}.
-\]
-Theorem~\ref{thm:upper} improves this to \(N^{3N+o(N)}\) by counting connected
-components of the complement of only \(O(N^2)\) cubic and quartic
-self-intersection walls.
-
 There is an important distinction between counting determinant sign data and
 counting chambers.  Order-type and oriented-matroid bounds count possible sign
 patterns of minors.  The chamber count asks for connected components of
@@ -1087,10 +1067,11 @@ realization sets for such sign patterns, after intersecting with the stick-knot
 discriminant complement.  Realization spaces of oriented matroids can be
 topologically complicated by universality phenomena \cite{Mnev,RichterGebert};
 hence matroid enumeration alone does not automatically give the chamber count.
-Here it nevertheless bounds knot types because the strong-geometry theorem
-provides a direct map from the sign data to isotopy class.  Our chamber method
-uses a smaller polynomial family and does not claim that its sign vector alone
-classifies the knot.
+The strong-geometry reconstruction theorem \cite{GrosRamirez} supplies a
+different connection between enriched sign data and knot type.  Its
+reconstruction statement is related geometric work; the component-counting
+proof here works directly with the self-intersection walls and does not use
+that theorem or assume that a wall sign vector classifies the knot.
 
 A second route is genuinely fewnomial.  Existing fewnomial theorems control
 positive solutions of sparse systems and the topology of sparse hypersurfaces

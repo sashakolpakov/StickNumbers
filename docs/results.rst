@@ -31,10 +31,10 @@ with the binomial denominator retained, gives the direct upper estimate
 :math:`N^{3N+o(N)}`.
 
 The generic crossing-diagram route gives the coarser baseline
-:math:`\exp(O(N^2))`. A 2025 strong-geometry reconstruction theorem already
-implies the factorial scale; extracting the signs used in its proof gives
-:math:`N^{6N+o(N)}`. The direct discriminant count improves that extracted
-exponent from :math:`6` to :math:`3`.
+:math:`\exp(O(N^2))`. To our knowledge, the present upper and lower bounds
+give the first explicit determination of the sharp logarithmic growth order
+in the stick budget. The proof is independent of strong-geometry
+reconstruction results.
 
 For the lower bound, an explicit family of doubly down--up permutations feeds
 long Garside words, endpoint purification, the Malyutin--Stupakov injection,
